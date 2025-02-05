@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.js", 
+        "use": "@vercel/node"
+      }
+    ],
+    "env": {
+        "JWT_SECRET": "@JWT_SECRET", 
+        "DATABASE_URL": "@DATABASE_URL" 
+    }
+  }
+  
