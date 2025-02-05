@@ -1,41 +1,63 @@
-🚀 Phoenix: IMF Gadget API
-📌 Project Overview
-The IMF Gadget API is a secure system designed to manage and track high-tech espionage gadgets used by the Impossible Missions Force (IMF).
-It allows agents to:
-✅ Retrieve available gadgets with mission success probabilities
-✅ Add, update, and decommission gadgets
-✅ Trigger self-destruct sequences for critical gadgets
-✅ Authenticate securely using JWT-based authorization
+# 🚀 Phoenix: IMF Gadget API
 
-This API is built with Node.js, Express, PostgreSQL, and Sequelize, ensuring scalability, security, and controlled access.
+## 📌 Project Overview
 
-🔐 Security Implementation
-✅ JWT Authentication & Authorization
-Agents register using their agent_name and password.
-bcrypt is used to hash passwords before storing them securely in the database.
-Upon successful login, a JWT token is generated with 2-hour validity.
-Every request to secured endpoints must include this token in the Authorization header using the Bearer Token format.
+The **IMF Gadget API** is a secure system designed to manage and track high-tech espionage gadgets used by the **Impossible Missions Force (IMF)**. This API enables IMF agents to manage their gadget inventory, trigger self-destruct sequences for critical gadgets, and perform other mission-critical actions.
 
+### Key Features:
+- **Retrieve** available gadgets with random mission success probabilities.
+- **Add**, **update**, and **decommission** gadgets.
+- **Trigger self-destruct sequences** for critical gadgets.
+- **Secure authentication** using JWT-based authorization.
 
-✅ Password Security with bcrypt
-bcrypt applies a one-way hashing algorithm, ensuring passwords are not stored in plain text.
-During login, the provided password is compared with the stored hash to verify authentication securely.
-📌 Features of This API
-🛠️ Gadget Inventory Management (/api/gadgets)
-✅ List All Gadgets → Fetch all gadgets with a random mission success probability (1-100%).
-✅ Filter Gadgets by Status → Retrieve gadgets that are Available, Deployed, Destroyed, or Decommissioned.
-✅ Add a New Gadget → Assigns a unique random codename (e.g., "The Nightingale").
-✅ Update a Gadget → Modify gadget details (except codename).
-✅ Soft Delete a Gadget → Instead of deleting, the gadget is marked as "Decommissioned" with a timestamp.
+Built with **Node.js**, **Express**, **PostgreSQL**, and **Sequelize**, this API ensures scalability, security, and controlled access for agents.
 
-💣 Self-Destruct Sequence (/api/gadgets/{id}/self-destruct)
-✅ Trigger Self-Destruct → Requires a randomly generated confirmation code before execution.
+---
 
-📌 Authentication Endpoints
-📝 Agent Signup (POST /api/agents/signup)
-Registers a new agent by storing a hashed password securely.
-Prevents duplicate agent_name registrations.
-Returns a success message upon successful registration.
-🔑 Agent Login (POST /api/agents/login)
-Verifies agent_name and hashed password.
-On success, returns a JWT token (valid for 2 hours) to authenticate further requests.
+## 🔐 Security Implementation
+
+### ✅ JWT Authentication & Authorization
+
+This API employs **JWT-based authentication** to ensure secure access to protected routes. 
+
+- Agents register by providing their `agent_name` and `password`.
+- **bcrypt** is used to hash passwords before securely storing them in the database.
+- Upon successful login, a **JWT token** is generated, valid for **2 hours**.
+- Every request to secured endpoints requires the token in the **Authorization header** using the **Bearer Token** format.
+
+### ✅ Password Security with bcrypt
+
+To enhance security, **bcrypt** is used for password hashing. This ensures that passwords are not stored in plain text.
+
+- During login, the provided password is securely compared with the stored hashed password to verify authentication.
+
+---
+
+## 📌 Features of This API
+
+### 🛠️ Gadget Inventory Management (`/api/gadgets`)
+
+- **List All Gadgets**: Fetch all gadgets with a random mission success probability (1-100%).
+- **Filter Gadgets by Status**: Retrieve gadgets based on their status: `Available`, `Deployed`, `Destroyed`, or `Decommissioned`.
+- **Add a New Gadget**: Create a gadget with a unique, randomly generated codename (e.g., "The Nightingale").
+- **Update a Gadget**: Modify gadget details (excluding codename).
+- **Soft Delete a Gadget**: Mark gadgets as "Decommissioned" rather than deleting them, along with a timestamp.
+
+### 💣 Self-Destruct Sequence (`/api/gadgets/{id}/self-destruct`)
+
+- **Trigger Self-Destruct**: Send a confirmation code to securely initiate the gadget’s self-destruct sequence.
+
+---
+
+## 📌 Authentication Endpoints
+
+### 📝 Agent Signup (`POST /api/agents/signup`)
+
+- **Register a new agent** by securely storing a hashed password.
+- Prevents duplicate `agent_name` registrations.
+- Returns a success message upon successful registration.
+
+### 🔑 Agent Login (`POST /api/agents/login`)
+
+- Verifies the `agent_name` and compares the hashed password for authentication.
+- Upon success, a **JWT token** is returned (valid for 2 hours) to authenticate further requests.
